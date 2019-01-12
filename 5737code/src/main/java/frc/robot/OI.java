@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.Joystick;
  */
 public class OI {
 
-  Joystick stick = new Joystick(RobotMap.joyPort);
+  public Joystick stick = new Joystick(RobotMap.joyPort);
   // Button button = new JoystickButton(stick, buttonNumber);
 
   // There are a few additional built in buttons you can use. Additionally,

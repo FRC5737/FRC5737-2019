@@ -23,6 +23,10 @@ public class ManualDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double x = Robot.oi.stick.getX();
+    double y = Robot.oi.stick.getY();
+    double z = Robot.oi.stick.getZ();
+    Robot.driveBase.ManualDrive(x, y, z);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -40,5 +44,6 @@ public class ManualDrive extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }

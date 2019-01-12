@@ -18,9 +18,9 @@ public class RobotMap {
   public static int joyPort = 0;
 
   //Drive Base
-  public static int leftFrontMotor = 1;
-  public static int leftBackMotor = 2;
+  public static int leftFrontMotor = 4;
+  public static int leftBackMotor = 1;
   public static int rightFrontMotor = 3;
-  public static int rightBackMotor = 4;
+  public static int rightBackMotor = 2;
 
 }
