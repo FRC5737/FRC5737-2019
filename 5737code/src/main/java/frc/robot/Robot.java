@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.ManualDrive;
 import frc.robot.subsystems.DriveBase;
 
 /**
@@ -25,7 +24,6 @@ import frc.robot.subsystems.DriveBase;
 public class Robot extends TimedRobot {
 
   public static OI m_oi;
-  
   public static final DriveBase driveBase = new DriveBase();
 
   Command m_autonomousCommand;
