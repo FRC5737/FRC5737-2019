@@ -38,9 +38,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     oi = new OI();
 
-
-    // chooser.addOption("My Auto", new MyAutoCommand());
-    chooser.addDefault("Default Auto", new ManualDrive());
+    chooser.addDefault("Drive manually", new ManualDrive());
     SmartDashboard.putData("Auto mode", chooser);
   }
 
