@@ -8,42 +8,37 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.subsystems.DriveBase;
 import frc.robot.Robot;
-import java.lang.Math;
 
-public class ManualDrive extends Command {
-  public ManualDrive() {
+public class PolarDrive extends Command {
+
+private double pMagnitude;
+private double pAngle;
+private double pRotation;
+
+  public PolarDrive(double magnitude, double angle, double rotation) {
     requires(Robot.driveBase);
+    pMagnitude = magnitude;
+    pAngle = angle;
+    pRotation = rotation;
   }
 
-
+  // Called just before this Command runs the first time
   @Override
   protected void initialize() {
   }
 
-  // Drive robot with standard cartesian mecanum drive and squared inputs
+  // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double y = Math.pow(Math.abs(Robot.oi.stick.getX()),2);
-    if (Robot.oi.stick.getX() < 0) {
-      y = -y;
-    }
-    double x =  -(Math.pow(Math.abs(Robot.oi.stick.getY()),2));
-    if (Robot.oi.stick.getY() < 0) {
-      x = -x;
-    }
-    double z = Math.pow(Math.abs(Robot.oi.stick.getZ()),2);
-    if (Robot.oi.stick.getZ() < 0) {
-      z = -z;
-    }
-    
-    Robot.driveBase.ManualDrive(x, y, z);
+    Robot.driveBase.PolarDrive(pMagnitude, pAngle, pRotation);
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return true;
   }
 
   // Called once after isFinished returns true
@@ -55,6 +50,5 @@ public class ManualDrive extends Command {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

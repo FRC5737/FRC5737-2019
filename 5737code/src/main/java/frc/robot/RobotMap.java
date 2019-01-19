@@ -23,4 +23,9 @@ public class RobotMap {
   public static int rightFrontMotor = 3;
   public static int rightBackMotor = 2;
 
+  public static double wheelCircumference = 63.84;
+
+  //Sensors
+  public static int pidgeonPort = 0;
+
 }

@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.sensors.PigeonIMU;
+
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -26,6 +28,7 @@ public class Robot extends TimedRobot {
 
   public static OI oi;
   public static final DriveBase driveBase = new DriveBase();
+  public static PigeonIMU pigeon = new PigeonIMU(RobotMap.pidgeonPort); 
 
   Command autonomousCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -37,8 +40,7 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-
-    chooser.addDefault("Drive manually", new ManualDrive());
+    
     SmartDashboard.putData("Auto mode", chooser);
   }
 
