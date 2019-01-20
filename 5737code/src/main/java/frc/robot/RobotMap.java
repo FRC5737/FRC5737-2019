@@ -28,4 +28,11 @@ public class RobotMap {
   //Sensors
   public static int pidgeonPort = 0;
 
+  //PID
+  //Drive Base
+  public static double driveP = 2.0;
+  public static double driveI = 0.0;
+  public static double driveD = 0.0;
+
+
 }

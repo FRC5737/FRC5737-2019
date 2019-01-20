@@ -23,10 +23,10 @@ import frc.robot.commands.ManualDrive;
 public class DriveBase extends Subsystem {
 
   //Store the current robot position. Needs to be reset and recalculated whenever possible to maintain accuracy.
-  public static double xCoordinate = 0;
-  public static double yCoordinate = 0;
-  public static double angle = 0; //Positive is clockwise, negative is counter clockwise
-  public static double velocity = 0;
+  public double xCoordinate = 0;
+  public double yCoordinate = 0;
+  public double angle = 0; //Positive is clockwise, negative is counter clockwise
+  public double velocity = 0;
 
   public WPI_TalonSRX leftFrontTalon = new WPI_TalonSRX(RobotMap.leftFrontMotor);
   public WPI_TalonSRX leftBackTalon = new WPI_TalonSRX(RobotMap.leftBackMotor);
