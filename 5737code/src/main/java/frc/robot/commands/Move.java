@@ -58,16 +58,17 @@ public class Move extends Command {
     } 
     else {
       targetRot = 0.0;
-      destination = true;
     }
-    System.out.println(targetRot);
+
     //Driving the robot through polar drive
-    pMove[0] = 0; // Temp for testing turning PID
     Robot.driveBase.PolarDrive(pMove[0], adjustedAngle, targetRot * -1);
     //pMove[1] -= Robot.driveBase.velocity * .02; //Decrease the distance needed to be moved by the speed of the robot multiplied by the time of each iteration
-    /*if (pMove[1] <= 0) {
+    pMove[1] -= pMove[0] * RobotMap.maxSpeed; //Temp "stupid" distance estimate
+    if (targetRot == 0 && pMove[1] <= 0) {
       destination = true;
-    }*/
+    } else if (pMove[1] <= 0) {
+      pMove[0] = 0;
+    } //Check if destination reached
 
   }
 
