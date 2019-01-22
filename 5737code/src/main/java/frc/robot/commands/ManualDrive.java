@@ -36,7 +36,7 @@ public class ManualDrive extends Command {
     if (Robot.oi.stick.getZ() < 0) {
       z = -z;
     }
-    
+    //System.out.println("Driving");
     Robot.driveBase.ManualDrive(x, y, z);
   }
 

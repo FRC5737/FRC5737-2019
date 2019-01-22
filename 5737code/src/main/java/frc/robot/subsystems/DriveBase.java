@@ -41,7 +41,7 @@ public class DriveBase extends Subsystem {
   public MecanumDrive mecanumDrive = new MecanumDrive(leftFrontTalon, leftBackTalon, rightFrontTalon, rightBackTalon);
 
   public void ManualDrive (double x, double y, double z){
-    mecanumDrive.driveCartesian(y, x, z);
+    mecanumDrive.driveCartesian(y, x, z,angle);
   }
   
   public void PolarDrive (double magnitude, double angle, double zRotation) {

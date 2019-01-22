@@ -15,8 +15,8 @@ public class Move extends Command {
   //This command controls the Polar Drive command
   //Set speed to move at, distance to move at what angle, and amount to rotate while moving
   //Please give this command a target angle or rotation of -179 to 180
-  private double pMove[] = new double[3];
-  private boolean destination  = false;
+  private double pMove[] = new double[4];
+  private boolean destination;
   private double integral, prevError, derivative, rotationError, adjustedAngle, targetRot = 0.0;
   private double tolerance = 3.0; //Allow 3 degrees of error to rotation.
 
@@ -30,7 +30,7 @@ public class Move extends Command {
 
   @Override
   protected void initialize() {
-
+    destination  = false;
   }
 
   @Override
@@ -58,13 +58,17 @@ public class Move extends Command {
     } 
     else {
       targetRot = 0.0;
-    }
-    //Driving the robot through polar drive
-    Robot.driveBase.PolarDrive(pMove[0], adjustedAngle, targetRot);
-    //pMove[1] -= Robot.driveBase.velocity * .02; //Decrease the distance needed to be moved by the speed of the robot multiplied by the time of each iteration
-    if (pMove[1] <= 0) {
       destination = true;
     }
+    System.out.println(targetRot);
+    //Driving the robot through polar drive
+    pMove[0] = 0; // Temp for testing turning PID
+    Robot.driveBase.PolarDrive(pMove[0], adjustedAngle, targetRot * -1);
+    //pMove[1] -= Robot.driveBase.velocity * .02; //Decrease the distance needed to be moved by the speed of the robot multiplied by the time of each iteration
+    /*if (pMove[1] <= 0) {
+      destination = true;
+    }*/
+
   }
 
   @Override

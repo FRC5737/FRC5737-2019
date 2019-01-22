@@ -19,12 +19,15 @@ public class Update extends InstantCommand {
 
   public Update() {
     super();
-    requires(Robot.driveBase);
   }
 
   // Called once when the command executes
   @Override
   protected void initialize() {
+
+    //Debuggings
+    //System.out.println("Update starting");
+
     //Get pigeon values and update values for drive base
     PigeonState state = Robot.pigeon.getState();
     if (state == PigeonState.Ready) { //Safe programming ftw

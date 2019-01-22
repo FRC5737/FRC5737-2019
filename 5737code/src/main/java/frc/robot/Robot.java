@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.sensors.PigeonIMU;
 
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -14,7 +15,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.Auto;
+import frc.robot.commands.ManualDrive;
+import frc.robot.commands.Update;
 import frc.robot.subsystems.DriveBase;
 
 
@@ -23,9 +25,11 @@ public class Robot extends TimedRobot {
 
   public static OI oi;
   public static final DriveBase driveBase = new DriveBase();
-  public static PigeonIMU pigeon = new PigeonIMU(RobotMap.pidgeonPort); 
+  public static TalonSRX pigeonTalon = new TalonSRX(RobotMap.pidgeonPort);
+  public static PigeonIMU pigeon = new PigeonIMU(pigeonTalon); 
 
   Command autonomousCommand;
+  Command updateCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
 
 
@@ -37,8 +41,15 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     oi = new OI();
-    autonomousCommand = new Auto();
+    updateCommand = new Update();
+    autonomousCommand = new ManualDrive();
+
+    pigeon.setAccumZAngle(0);
+    pigeon.setYaw(0);
+
+    chooser.addDefault("Manual driving", autonomousCommand);
     SmartDashboard.putData("Auto mode", chooser);
+    SmartDashboard.putData(driveBase);
 
     Robot.driveBase.leftBackEncoder.reset();
     Robot.driveBase.leftFrontEncoder.reset();
@@ -48,6 +59,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
+    updateCommand.start();
+    //System.out.println(Robot.driveBase.angle);
   }
 
   @Override
