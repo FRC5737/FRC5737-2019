@@ -51,10 +51,10 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData(driveBase);
 
-    Robot.driveBase.leftBackEncoder.reset();
+    /*Robot.driveBase.leftBackEncoder.reset();
     Robot.driveBase.leftFrontEncoder.reset();
     Robot.driveBase.rightBackEncoder.reset();
-    Robot.driveBase.rightFrontEncoder.reset();
+    Robot.driveBase.rightFrontEncoder.reset();*/
   }
 
   @Override

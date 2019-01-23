@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Encoder;
@@ -33,10 +34,11 @@ public class DriveBase extends Subsystem {
   public WPI_TalonSRX rightFrontTalon = new WPI_TalonSRX(RobotMap.rightFrontMotor);
   public WPI_TalonSRX rightBackTalon = new WPI_TalonSRX(RobotMap.rightBackMotor);
 
-  public Encoder leftFrontEncoder = new Encoder (0, 1, false, EncodingType.k4X);
+  /*public Encoder leftFrontEncoder = new Encoder (0, 1, false, EncodingType.k4X);
   public Encoder leftBackEncoder = new Encoder (2, 3, false, EncodingType.k4X);
   public Encoder rightFrontEncoder = new Encoder (4, 5, false, EncodingType.k4X);
-  public Encoder rightBackEncoder = new Encoder (6, 7, false, EncodingType.k4X);
+  public Encoder rightBackEncoder = new Encoder (6, 7, false, EncodingType.k4X);*/ 
+  //Code above is for use with new encoders
 
   public MecanumDrive mecanumDrive = new MecanumDrive(leftFrontTalon, leftBackTalon, rightFrontTalon, rightBackTalon);
 
@@ -50,6 +52,8 @@ public class DriveBase extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
+    //leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+
     setDefaultCommand(new ManualDrive());
   }
 }

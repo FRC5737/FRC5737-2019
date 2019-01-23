@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
@@ -26,11 +27,13 @@ public class Move extends Command {
     pMove[1] = distance;
     pMove[2]  = angle;
     pMove[3] = rotation;
+    destination  = false;
+
   }
 
   @Override
   protected void initialize() {
-    destination  = false;
+
   }
 
   @Override
@@ -60,11 +63,13 @@ public class Move extends Command {
       targetRot = 0.0;
     }
 
+    SmartDashboard.putBoolean("There?",destination);
+
     //Driving the robot through polar drive
     Robot.driveBase.PolarDrive(pMove[0], adjustedAngle, targetRot * -1);
     //pMove[1] -= Robot.driveBase.velocity * .02; //Decrease the distance needed to be moved by the speed of the robot multiplied by the time of each iteration
-    pMove[1] -= pMove[0] * RobotMap.maxSpeed; //Temp "stupid" distance estimate
-    if (targetRot == 0 && pMove[1] <= 0) {
+    pMove[1] -= pMove[0] * RobotMap.maxSpeed * 0.02; //Temp "stupid" distance estimate
+    if (targetRot == 0.0 && pMove[1] <= 0) {
       destination = true;
     } else if (pMove[1] <= 0) {
       pMove[0] = 0;

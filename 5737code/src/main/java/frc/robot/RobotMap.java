@@ -34,5 +34,7 @@ public class RobotMap {
   public static double driveI = 0.0;
   public static double driveD = 0.0;
 
+  public static double maxSpeed = 300.0;
+
 
 }
