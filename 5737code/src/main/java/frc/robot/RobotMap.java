@@ -30,7 +30,7 @@ public class RobotMap {
 
   //PID
   //Drive Base
-  public static double driveP = 0.01;
+  public static double driveP = 0.002;
   public static double driveI = 0.0;
   public static double driveD = 0.0;
 

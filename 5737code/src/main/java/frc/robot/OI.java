@@ -26,6 +26,10 @@ public class OI {
   public JoystickButton button8 = new JoystickButton(stick, 8);
 
   public OI() {
-		button1.whenPressed(new Move(0,0,0,90));
+		button1.whenPressed(new Move(0.5,100,0,0));
+		button2.whenPressed(new Move(0.5,100,90,0));
+		button3.whenPressed(new Move(0.3,100,-90,90));
+		button4.whenPressed(new Move(0.5,100,180,0));
+		button5.whenPressed(new Move(0.5,100,45,0));
 	}
 }

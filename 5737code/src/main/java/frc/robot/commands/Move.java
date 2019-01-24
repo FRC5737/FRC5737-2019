@@ -20,20 +20,29 @@ public class Move extends Command {
   private boolean destination;
   private double integral, prevError, derivative, rotationError, adjustedAngle, targetRot = 0.0;
   private double tolerance = 3.0; //Allow 3 degrees of error to rotation.
+  private double pDistance = 0.0;
+  private double pSpeed = 0.0;
+  private double targetRotMinimum = 0.2;
 
   public Move(double speed, double distance, double angle, double rotation) {
     requires(Robot.driveBase);
     pMove[0] = speed;
+    pSpeed = speed;
     pMove[1] = distance;
+    pDistance = distance;
     pMove[2]  = angle;
     pMove[3] = rotation;
-    destination  = false;
 
   }
 
   @Override
   protected void initialize() {
-
+    destination  = false;
+    prevError = 0.0;
+    targetRot = 0.0;
+    rotationError = 0.0;
+    pMove[1] = pDistance;
+    pMove[0] = pSpeed;
   }
 
   @Override
@@ -46,6 +55,7 @@ public class Move extends Command {
     } else if (adjustedAngle < -180) {
       adjustedAngle = 360 - -1 * adjustedAngle;
     }
+    adjustedAngle = - adjustedAngle;
     //Use PID to move at adjusted angle while rotating to target rotation
     rotationError = (pMove[3] + 180) - (Robot.driveBase.angle + 180);
     if (rotationError > 180) {
@@ -62,13 +72,24 @@ public class Move extends Command {
     else {
       targetRot = 0.0;
     }
+    
+    SmartDashboard.putNumber("Rotation Error", rotationError);
+    SmartDashboard.putNumber("Target Rotation", targetRot);
+    SmartDashboard.putNumber("Distance", pMove[1]);
 
-    SmartDashboard.putBoolean("There?",destination);
+    if (targetRot != 0 && Math.abs(targetRot) < targetRotMinimum) {
+      if (targetRot > 0){
+        targetRot = targetRotMinimum;
+      } else {
+        targetRot = - targetRotMinimum;
+      }
+    } //Make sure target rot is above a minimum so robot does not get stuck
 
     //Driving the robot through polar drive
     Robot.driveBase.PolarDrive(pMove[0], adjustedAngle, targetRot * -1);
     //pMove[1] -= Robot.driveBase.velocity * .02; //Decrease the distance needed to be moved by the speed of the robot multiplied by the time of each iteration
     pMove[1] -= pMove[0] * RobotMap.maxSpeed * 0.02; //Temp "stupid" distance estimate
+    SmartDashboard.putNumber("Distance2", pMove[1]);
     if (targetRot == 0.0 && pMove[1] <= 0) {
       destination = true;
     } else if (pMove[1] <= 0) {
