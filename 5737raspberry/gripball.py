@@ -50,7 +50,7 @@ class GripDetectBall:
         self.cv_erode_output = None
 
         self.__find_blobs_input = self.cv_erode_output
-        self.__find_blobs_min_area = 20.0
+        self.__find_blobs_min_area = 40.0
         self.__find_blobs_circularity = [0.0, 1.0]
         self.__find_blobs_dark_blobs = False
 
