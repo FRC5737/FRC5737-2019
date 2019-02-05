@@ -11,36 +11,48 @@ from ballcontour import GripBallContour
 #5737 python code running on raspberry pi coprocessor
 #This is the code that will actually be called
 
-def Watershed(img,opening): #Taken from official opencv docs
-    #This is the watershed code that seperates balls placed closely together
-    kernel = numpy.ones((5,5),numpy.uint8)
-    sure_bg = cv2.dilate(opening,kernel,iterations=8)
-    # Finding sure foreground area
-    dist_transform = cv2.distanceTransform(opening,cv2.DIST_L2,5)
-    ret, sure_fg = cv2.threshold(dist_transform,0.7*dist_transform.max(),255,0)
-    # Finding unknown region
-    sure_fg = numpy.uint8(sure_fg)
-    unknown = cv2.subtract(sure_bg,sure_fg)
-    # Marker labelling
-    ret, markers = cv2.connectedComponents(sure_fg)
-    # Add one to all labels so that sure background is not 0, but 1
-    markers = markers+1
-    # Now, mark the region of unknown with zero
-    markers[unknown==255] = 0
-    markers = cv2.watershed(img,markers)
-    img[markers == -1] = [255,0,0]
-    return img
-
-cam = cv2.VideoCapture(0) #init cameras
+#cam = cv2.VideoCapture(0) #init cameras
 data = {} #The values that will be sent to the roborio
+ball = GripBallContour()
 
 while True:
-    _,img = cam.read()
-    ball = GripBallContour()
-    ball.process(img)   
-    watershed = Watershed(ball.cv_resize_output,ball.cv_dilate_output)
-    cv2.imshow("Output1",watershed)
+    #_,img = cam.read()
+    img = cv2.imread('/Users/mark/Desktop/6.jpg',3)
+    ball.process(img)
+    contoursFull = ball.filter_contours_0_output
+    contoursExtra = ball.filter_contours_1_output
+    #Remove all outer contours (Probably could do this faster with hierarchy, but not gonna bother for now)
+    for i in contoursFull[:]:
+        for j in contoursExtra:
+            res = cv2.matchShapes(i, j, cv2.CONTOURS_MATCH_I2,0)
+            if res == 0:
+                contoursFull.remove(i)
+                
+    '''#Convex hull it Technically not needed
+    contourFinal = []
+    for i in contoursFull:
+        contoursFinal.append(cv2.convexHull(i,False))'''
+
+    #Minimum enclosing circles for speed, useless if use hough circle
+    ballFinal = []
+    for i in contoursFull:
+        (x,y),radius = cv2.minEnclosingCircle(i)
+        center = (int(x),int(y))
+        radius = int(radius)
+        ballFinal.append((center,radius))
+    #Draw circles for debug
+    for i in ballFinal:
+        ball.cv_resize_output = cv2.circle(ball.cv_resize_output,i[0],i[1],(0,255,0),2)
+        
+    #cv2.drawContours(ball.cv_resize_output, contoursFinal, -1, (0,255,0), 3)
+    cv2.imshow("Cont",ball.cv_resize_output)
     cv2.waitKey(0)
+
+def circle(contour):
+    (x,y),radius = cv.minEnclosingCircle(contour)
+    center = (int(x),int(y))
+    radius = int(radius)
+    return (center,radius)
     
 
 
