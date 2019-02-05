@@ -24,16 +24,16 @@ public class ManualDrive extends Command {
   // Drive robot with standard cartesian mecanum drive and squared inputs
   @Override
   protected void execute() {
-    double y = Math.pow(Math.abs(Robot.oi.stick.getX()),2);
-    if (Robot.oi.stick.getX() < 0) {
+    double y = Math.pow(Math.abs(Robot.oi.driveStick.getX()),2);
+    if (Robot.oi.driveStick.getX() < 0) {
       y = -y;
     }
-    double x =  -(Math.pow(Math.abs(Robot.oi.stick.getY()),2));
-    if (Robot.oi.stick.getY() < 0) {
+    double x =  -(Math.pow(Math.abs(Robot.oi.driveStick.getY()),2));
+    if (Robot.oi.driveStick.getY() < 0) {
       x = -x;
     }
-    double z = Math.pow(Math.abs(Robot.oi.stick.getZ()),2);
-    if (Robot.oi.stick.getZ() < 0) {
+    double z = Math.pow(Math.abs(Robot.oi.driveStick.getZ()),2);
+    if (Robot.oi.driveStick.getZ() < 0) {
       z = -z;
     }
     //System.out.println("Driving");

@@ -8,10 +8,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
+import com.ctre.phoenix.motorcontrol.StatusFrameEnhanced;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.sensors.PigeonIMU;
 
-import edu.wpi.first.wpilibj.Encoder;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import frc.robot.RobotMap;
@@ -34,25 +34,35 @@ public class DriveBase extends Subsystem {
   public WPI_TalonSRX rightFrontTalon = new WPI_TalonSRX(RobotMap.rightFrontMotor);
   public WPI_TalonSRX rightBackTalon = new WPI_TalonSRX(RobotMap.rightBackMotor);
 
-  /*public Encoder leftFrontEncoder = new Encoder (0, 1, false, EncodingType.k4X);
-  public Encoder leftBackEncoder = new Encoder (2, 3, false, EncodingType.k4X);
-  public Encoder rightFrontEncoder = new Encoder (4, 5, false, EncodingType.k4X);
-  public Encoder rightBackEncoder = new Encoder (6, 7, false, EncodingType.k4X);*/ 
-  //Code above is for use with new encoders
+  //Pigeon 
+  public PigeonIMU pigeon = new PigeonIMU(RobotMap.pidgeonPort);
 
   public MecanumDrive mecanumDrive = new MecanumDrive(leftFrontTalon, leftBackTalon, rightFrontTalon, rightBackTalon);
 
+  //Driving with cartesian
   public void ManualDrive (double x, double y, double z){
     mecanumDrive.driveCartesian(y, x, z,angle);
   }
   
+  //Driving with polar
   public void PolarDrive (double magnitude, double angle, double zRotation) {
     mecanumDrive.drivePolar(magnitude, angle, zRotation);
   }
 
   @Override
   public void initDefaultCommand() {
-    //leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    //The encoders we use are https://www.andymark.com/products/srx-magnetic-encoder
+    //Init encoders
+    leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    leftBackTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    rightFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    rightBackTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    //Adjust frame of each iteration to fit with each loop
+    //20 ms
+    leftFrontTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+    leftBackTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+    rightFrontTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+    rightBackTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
     setDefaultCommand(new ManualDrive());
   }

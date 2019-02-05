@@ -7,9 +7,6 @@
 
 package frc.robot;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.sensors.PigeonIMU;
-
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -17,16 +14,22 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ManualDrive;
 import frc.robot.commands.Update;
+import frc.robot.subsystems.BallMechanism;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.PlateMechanism;
 
 
 
 public class Robot extends TimedRobot {
 
   public static OI oi;
+
+  //Subsystem init
   public static final DriveBase driveBase = new DriveBase();
-  public static TalonSRX pigeonTalon = new TalonSRX(RobotMap.pidgeonPort);
-  public static PigeonIMU pigeon = new PigeonIMU(pigeonTalon); 
+  public static final Elevator elevator = new Elevator();
+  public static final PlateMechanism plateMechanism = new PlateMechanism();
+  public static final BallMechanism ballMechanism = new BallMechanism();
 
   Command autonomousCommand;
   Command updateCommand;
@@ -44,10 +47,9 @@ public class Robot extends TimedRobot {
     updateCommand = new Update();
     autonomousCommand = new ManualDrive();
 
-    pigeon.setAccumZAngle(0);
-    pigeon.setYaw(0);
+    driveBase.pigeon.setAccumZAngle(0);
+    driveBase.pigeon.setYaw(0);
 
-    chooser.addDefault("Manual driving", autonomousCommand);
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData(driveBase);
 
