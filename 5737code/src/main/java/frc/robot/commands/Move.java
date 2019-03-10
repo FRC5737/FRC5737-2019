@@ -88,7 +88,7 @@ public class Move extends Command {
     //Driving the robot through polar drive
     Robot.driveBase.PolarDrive(pMove[0], adjustedAngle, targetRot * -1);
     //pMove[1] -= Robot.driveBase.velocity * .02; //Decrease the distance needed to be moved by the speed of the robot multiplied by the time of each iteration
-    pMove[1] -= pMove[0] * RobotMap.maxSpeed * 0.02; //Temp "stupid" distance estimate
+    pMove[1] -= pMove[0] * 300 * 0.02; //Temp "stupid" distance estimate
     SmartDashboard.putNumber("Distance2", pMove[1]);
     if (targetRot == 0.0 && pMove[1] <= 0) {
       destination = true;

@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -22,8 +21,7 @@ import frc.robot.commands.ManualElevator;
 
 public class Elevator extends Subsystem {
   //Initialize two motors - One slaved to the other
-  public WPI_TalonSRX elevatorMainMotor = new WPI_TalonSRX(RobotMap.elevatorLeftMotor);
-  public WPI_TalonSRX elevatorSlaveMotor = new WPI_TalonSRX(RobotMap.elevatorRightMotor);
+  public WPI_TalonSRX elevatorMainMotor = new WPI_TalonSRX(RobotMap.elevatorMotor);
 
   //Initalize two limit switches - one top and one bottom
   public DigitalInput bottomSwitch = new DigitalInput(RobotMap.limitSwitchBottom);
@@ -32,25 +30,23 @@ public class Elevator extends Subsystem {
 
   //Up and down, with checks in case already in position to prevent damage
   public void up(double speed) {
-    if (topSwitch.get()) {
+    if (topSwitch.get() == false) {
       elevatorMainMotor.set(ControlMode.PercentOutput,speed);
     } else { 
-      elevatorMainMotor.set(0);
+      elevatorMainMotor.set(0.1);
     }
   }
 
   public void down(double speed) {
-    if (bottomSwitch.get()) {
+    if (bottomSwitch.get() == false) {
       elevatorMainMotor.set(ControlMode.PercentOutput,-speed);
     } else { 
-      elevatorMainMotor.set(0);
+      elevatorMainMotor.set(0.1);
     }
   }
 
   @Override
   public void initDefaultCommand() {
-    elevatorSlaveMotor.follow(elevatorMainMotor);
-    elevatorSlaveMotor.setInverted(InvertType.InvertMotorOutput);
 
     //Default command
     setDefaultCommand(new ManualElevator());

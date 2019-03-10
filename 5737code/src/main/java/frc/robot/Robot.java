@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -14,10 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ManualDrive;
 import frc.robot.commands.Update;
-import frc.robot.subsystems.BallMechanism;
+import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Elevator;
-import frc.robot.subsystems.PlateMechanism;
 
 
 
@@ -28,8 +28,9 @@ public class Robot extends TimedRobot {
   //Subsystem init
   public static final DriveBase driveBase = new DriveBase();
   public static final Elevator elevator = new Elevator();
-  public static final PlateMechanism plateMechanism = new PlateMechanism();
-  public static final BallMechanism ballMechanism = new BallMechanism();
+  public static final Claw claw = new Claw();
+
+  public static final Compressor c = new Compressor(RobotMap.compressor);
 
   Command autonomousCommand;
   Command updateCommand;
@@ -53,6 +54,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putData("Auto mode", chooser);
     SmartDashboard.putData(driveBase);
 
+    c.setClosedLoopControl(true);
+
     /*Robot.driveBase.leftBackEncoder.reset();
     Robot.driveBase.leftFrontEncoder.reset();
     Robot.driveBase.rightBackEncoder.reset();
@@ -61,8 +64,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void robotPeriodic() {
-    updateCommand.start();
-    //System.out.println(Robot.driveBase.angle);
+    //updateCommand.start();
   }
 
   @Override

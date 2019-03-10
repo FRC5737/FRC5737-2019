@@ -5,17 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
 /**
- * Plate Mechanism
+ * Add your docs here.
  */
-public class PlateMechanism extends Subsystem {
-  
-
-  @Override
-  public void initDefaultCommand() {
+public class ClawOut extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public ClawOut() {
+    super();
+    requires(Robot.claw);
   }
+
+  // Called once when the command executes
+  @Override
+  protected void initialize() {
+    Robot.claw.out();
+  }
+
 }

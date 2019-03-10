@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Joystick;
@@ -29,10 +31,14 @@ public class Robot extends TimedRobot {
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
 
   Compressor c = new Compressor(0);
-  DoubleSolenoid sole = new DoubleSolenoid(0,1);
+  DoubleSolenoid sole = new DoubleSolenoid(2,3);
+  // DoubleSolenoid sole1 = new DoubleSolenoid(0,1);
   Joystick joy = new Joystick(0);
-  JoystickButton button1 = new JoystickButton(joy, 0);
-  JoystickButton button2 = new JoystickButton(joy, 1);
+  //JoystickButton button1 = new JoystickButton(joy, 1);
+  //JoystickButton button2 = new JoystickButton(joy, 2);
+  //JoystickButton button3 = new JoystickButton(joy, 4);
+  //WPI_TalonSRX talon1 = new WPI_TalonSRX(7);
+  //WPI_TalonSRX talon2 = new WPI_TalonSRX(8);
 
   /**
    * This function is run when the robot is first started up and should be
@@ -56,6 +62,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotPeriodic() {
+    System.out.println("Running");
   }
 
   /**
@@ -97,16 +104,24 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void teleopPeriodic() {
-    if (button1.get()) {
+    /*if (button1.get()) {
 
-      sole.set(DoubleSolenoid.Value.kForward);
-    } else if (button2.get()){
-      sole.set(DoubleSolenoid.Value.kReverse);
-    } else {
-      sole.set(DoubleSolenoid.Value.kOff);
-    }
+      //sole.set(DoubleSolenoid.Value.kForward);
+      //sole1.set(DoubleSolenoid.Value.kForward);
+    } 
+    
+    if (button2.get()){
+      //sole.set(DoubleSolenoid.Value.kReverse);
+      //sole1.set(DoubleSolenoid.Value.kReverse);
+    } */
+
+  //talon1.set(joy.getY());
+  //talon2.set(joy.getY()*-1);
+
   }
 
+
+  
   /**
    * This function is called periodically during test mode.
    */

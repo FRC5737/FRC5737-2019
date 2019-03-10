@@ -5,17 +5,27 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.subsystems;
+package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.command.InstantCommand;
+import frc.robot.Robot;
 
 /**
- * Ball mechanism
+ * Add your docs here.
  */
-public class BallMechanism extends Subsystem {
-
-  @Override
-  public void initDefaultCommand() {
-    
+public class ClawIn extends InstantCommand {
+  /**
+   * Add your docs here.
+   */
+  public ClawIn() {
+    super();
+    requires (Robot.claw);
   }
+
+  // Called once when the command executes
+  @Override
+  protected void initialize() {
+    Robot.claw.in();
+  }
+
 }

@@ -10,9 +10,9 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class ManualElevator extends Command {
-  public ManualElevator() {
-    requires(Robot.elevator);
+public class ManualClaw extends Command {
+  public ManualClaw() {
+    requires(Robot.claw);
   }
 
   @Override
@@ -21,16 +21,7 @@ public class ManualElevator extends Command {
 
   @Override
   protected void execute() {
-    double s = Robot.oi.functionStick.getY();
-    double speed =  Math.pow(Math.abs(s),2);
-    if (Math.abs(speed) < 0.3) {
-      speed = 0;
-    }
-    if (s < 0) {
-      Robot.elevator.down(speed);
-    } else {
-      Robot.elevator.up(speed);
-    }
+    //Robot.claw.up(Robot.oi.functionStick.getY());
   }
 
   @Override
@@ -44,5 +35,6 @@ public class ManualElevator extends Command {
 
   @Override
   protected void interrupted() {
+    Robot.claw.up(0.0);
   }
 }

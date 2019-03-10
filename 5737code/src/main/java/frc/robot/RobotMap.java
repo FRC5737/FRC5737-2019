@@ -18,29 +18,46 @@ public class RobotMap {
   public static int lowJoyPort = 0;
   public static int highJoyPort = 1;
 
+  //Compressor
+  public static int compressor = 0;
+
   //Drive Base
     //Drive base actuators
-  public static int leftFrontMotor = 4;
-  public static int leftBackMotor = 1;
+  public static int leftFrontMotor = 1;
+  public static int leftBackMotor = 2;
   public static int rightFrontMotor = 3;
-  public static int rightBackMotor = 2;
+  public static int rightBackMotor = 4;
+  public static int climbMotorLeft = 5;
+  public static int climbMotorRight = 6;
+  public static int climbFrontF = 6;
+  public static int climbFrontR = 7;
+  public static int climbBackF = 0;
+  public static int climbBackR = 1;
     //Drive base constants
   public static double driveP = 0.002;
   public static double driveI = 0.0;
   public static double driveD = 0.0;
-  public static double maxSpeed = 300.0; //Replaced with encoder
-  public static double wheelRadius = 10.16; // 8 Inch wheel
+  public static double wheelRadius = 10.16;
     //Drive base sensors
   public static int pidgeonPort = 2;
 
   //Elevator
     //Elevator actuators
-  public static int elevatorLeftMotor = 5;
-  public static int elevatorRightMotor = 6;
+  public static int elevatorMotor = 7;
     //Elevator sensors
-    public static int limitSwitchBottom = 0;
-    public static int limitSwitchTop = 1;
+  public static int limitSwitchBottom = 7;
+  public static int limitSwitchTop = 8;
 
-
+  //Claw
+    //Claw actuators
+  public static int clawMotor = 8;
+  public static int leftSoleF = 4;
+  public static int leftSoleR = 5;
+  public static int centerSoleF = 3;
+  public static int centerSoleR = 2;
+  public static int rightSoleF = 4;
+  public static int rightSoleR = 5;
+    //Claw sensors
+  public static int clawPotentiometer = 0;
 
 }

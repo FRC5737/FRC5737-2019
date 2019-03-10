@@ -8,7 +8,7 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.Move;
+import frc.robot.commands.*;
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
@@ -17,23 +17,30 @@ public class OI {
 
 	//Main joystick for driver
   public Joystick driveStick = new Joystick(RobotMap.lowJoyPort);
-  public JoystickButton button1 = new JoystickButton(driveStick, 1);
-	public JoystickButton button2 = new JoystickButton(driveStick, 2);
-	public JoystickButton button3 = new JoystickButton(driveStick, 3);
-	public JoystickButton button4 = new JoystickButton(driveStick, 4);
-	public JoystickButton button5 = new JoystickButton(driveStick, 5);
-	public JoystickButton button6 = new JoystickButton(driveStick, 6);
-	public JoystickButton button7 = new JoystickButton(driveStick, 7);
-  public JoystickButton button8 = new JoystickButton(driveStick, 8);
+  public JoystickButton mainButton1 = new JoystickButton(driveStick, 1);
+	public JoystickButton mainButton2 = new JoystickButton(driveStick, 2);
+	public JoystickButton mainButton3 = new JoystickButton(driveStick, 3);
+	public JoystickButton mainButton4 = new JoystickButton(driveStick, 4);
+	public JoystickButton mainButton5 = new JoystickButton(driveStick, 5);
+	public JoystickButton mainButton6 = new JoystickButton(driveStick, 6);
+	public JoystickButton mainButton7 = new JoystickButton(driveStick, 7);
+  public JoystickButton mainButton8 = new JoystickButton(driveStick, 8);
 
 	//Seperate joystick for completing tasks
-  public Joystick functionStick = new Joystick(RobotMap.highJoyPort);
+	public Joystick functionStick = new Joystick(RobotMap.highJoyPort);
+  public JoystickButton funcButton1 = new JoystickButton(functionStick, 1);
+	public JoystickButton funcButton2 = new JoystickButton(functionStick, 2);
+	public JoystickButton funcButton3 = new JoystickButton(functionStick, 3);
+	public JoystickButton funcButton4 = new JoystickButton(functionStick, 4);
+	public JoystickButton funcButton5 = new JoystickButton(functionStick, 5);
+	public JoystickButton funcButton6 = new JoystickButton(functionStick, 6);
+	public JoystickButton funcButton7 = new JoystickButton(functionStick, 7);
+  public JoystickButton funcButton8 = new JoystickButton(functionStick, 8);
 
   public OI() {
-		button1.whenPressed(new Move(0.5,100,0,0));
-		button2.whenPressed(new Move(0.5,100,90,0));
-		button3.whenPressed(new Move(0.3,100,-90,90));
-		button4.whenPressed(new Move(0.5,100,180,0));
-		button5.whenPressed(new Move(0.5,100,45,0));
+		funcButton1.whenPressed(new ClawIn());
+		funcButton2.whenPressed(new ClawOut());
+		funcButton3.whenPressed(new Lift());
+		funcButton4.whenPressed(new Down());
 	}
 }
