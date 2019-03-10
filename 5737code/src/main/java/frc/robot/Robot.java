@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ManualDrive;
 import frc.robot.commands.Update;
 import frc.robot.subsystems.Claw;
+import frc.robot.subsystems.ClawWrist;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Elevator;
 
@@ -29,6 +30,7 @@ public class Robot extends TimedRobot {
   public static final DriveBase driveBase = new DriveBase();
   public static final Elevator elevator = new Elevator();
   public static final Claw claw = new Claw();
+  public static final ClawWrist clawWrist = new ClawWrist();
 
   public static final Compressor c = new Compressor(RobotMap.compressor);
 

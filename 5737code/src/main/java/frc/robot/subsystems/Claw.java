@@ -9,11 +9,9 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.interfaces.Potentiometer;
 import frc.robot.RobotMap;
 import frc.robot.commands.ManualClaw;
 
@@ -26,13 +24,7 @@ public class Claw extends Subsystem {
   public DoubleSolenoid centerSole = new DoubleSolenoid(RobotMap.centerSoleF, RobotMap.centerSoleR);
   //public DoubleSolenoid rightSole = new DoubleSolenoid(RobotMap.rightSoleF, RobotMap.rightSoleR);
 
-  public WPI_TalonSRX clawMotor = new WPI_TalonSRX(RobotMap.elevatorMotor);
-
-  //public AnalogPotentiometer clawPot = AnalogPotentiometer();
-
   boolean in = true;
-
-  public double angle;
 
   @Override
   public void initDefaultCommand() {
@@ -64,6 +56,5 @@ public class Claw extends Subsystem {
       centerSole.set(DoubleSolenoid.Value.kReverse);
     }
   }
-
 
 }
