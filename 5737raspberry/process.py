@@ -1,4 +1,4 @@
-import cv2;
+import cv2
 import numpy
 import math
 import time
@@ -11,13 +11,13 @@ from ballcontour import GripBallContour
 #5737 python code running on raspberry pi coprocessor
 #This is the code that will actually be called
 
-#cam = cv2.VideoCapture(0) #init cameras
+cam = cv2.VideoCapture(1) #init cameras
 data = {} #The values that will be sent to the roborio
 ball = GripBallContour()
 
 while True:
-    #_,img = cam.read()
-    img = cv2.imread('/Users/mark/Desktop/6.jpg',3)
+    _,img = cam.read()
+    #img = cv2.imread('/Users/mark/Desktop/WechatIMG152.jpeg',3)
     ball.process(img)
     contoursFull = ball.filter_contours_0_output
     contoursExtra = ball.filter_contours_1_output
@@ -46,7 +46,7 @@ while True:
         
     #cv2.drawContours(ball.cv_resize_output, contoursFinal, -1, (0,255,0), 3)
     cv2.imshow("Cont",ball.cv_resize_output)
-    cv2.waitKey(0)
+    cv2.waitKey(10)
 
 def circle(contour):
     (x,y),radius = cv.minEnclosingCircle(contour)
