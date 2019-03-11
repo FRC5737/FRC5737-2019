@@ -62,7 +62,7 @@ public class Update extends InstantCommand {
      * Algorithm courtesy of https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
     */
     //First obtain wheel angular velocity in radians travelled in last 0.02 seconds
-    double a,b,c,d;
+    /*double a,b,c,d;
     a = Math.toRadians(Robot.driveBase.leftFrontTalon.getSelectedSensorVelocity() * 0.087890625);
     b = Math.toRadians(Robot.driveBase.rightFrontTalon.getSelectedSensorVelocity() * 0.087890625);
     c = Math.toRadians(Robot.driveBase.leftBackTalon.getSelectedSensorVelocity() * 0.087890625);
@@ -84,7 +84,7 @@ public class Update extends InstantCommand {
 
     //Finally update this value to the robot drivebase
     Robot.driveBase.xCoordinate += globalX;
-    Robot.driveBase.yCoordinate += globalY;
+    Robot.driveBase.yCoordinate += globalY;*/
 
   }
 

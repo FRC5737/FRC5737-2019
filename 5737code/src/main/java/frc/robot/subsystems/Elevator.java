@@ -33,7 +33,7 @@ public class Elevator extends Subsystem {
     if (topSwitch.get() == false) {
       elevatorMainMotor.set(ControlMode.PercentOutput,speed);
     } else { 
-      elevatorMainMotor.set(0.1);
+      elevatorMainMotor.set(0.25);
     }
   }
 
@@ -41,7 +41,7 @@ public class Elevator extends Subsystem {
     if (bottomSwitch.get() == false) {
       elevatorMainMotor.set(ControlMode.PercentOutput,-speed);
     } else { 
-      elevatorMainMotor.set(0.1);
+      elevatorMainMotor.set(0.25);
     }
   }
 

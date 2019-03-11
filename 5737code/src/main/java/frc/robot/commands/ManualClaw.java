@@ -9,7 +9,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
-import frc.robot.subsystems.ClawWrist;
 
 public class ManualClaw extends Command {
   public ManualClaw() {
@@ -22,7 +21,7 @@ public class ManualClaw extends Command {
 
   @Override
   protected void execute() {
-    Robot.clawWrist.setSetpoint(Robot.oi.functionStick.getThrottle());
+    Robot.clawWrist.setSetpoint(((Robot.oi.functionStick.getThrottle()*-1+1)*50)+8);
   }
 
   @Override
@@ -36,6 +35,5 @@ public class ManualClaw extends Command {
 
   @Override
   protected void interrupted() {
-    Robot.claw.up(0.0);
   }
 }

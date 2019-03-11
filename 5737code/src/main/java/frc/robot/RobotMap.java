@@ -39,7 +39,7 @@ public class RobotMap {
   public static double driveD = 0.0;
   public static double wheelRadius = 10.16;
     //Drive base sensors
-  public static int pidgeonPort = 2;
+  public static int pidgeonPort = 0;
 
   //Elevator
     //Elevator actuators
