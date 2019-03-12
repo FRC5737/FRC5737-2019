@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import frc.robot.RobotMap;
 import frc.robot.commands.ManualClaw;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 
@@ -18,15 +19,14 @@ import edu.wpi.first.wpilibj.AnalogPotentiometer;
  */
 public class ClawWrist extends PIDSubsystem {
 
-  public WPI_TalonSRX clawMotor = new WPI_TalonSRX(RobotMap.elevatorMotor);
-
+  public WPI_TalonSRX clawMotor = new WPI_TalonSRX(RobotMap.clawMotor);
   public AnalogPotentiometer clawPot = new AnalogPotentiometer(RobotMap.clawPotentiometer,270,10);
-  public double angle;
+
+  public double clawZero;
 
   public ClawWrist() {
-    // Intert a subsystem name and PID values here
-    super("ClawWrist", 2, 0, 0);
-    setAbsoluteTolerance(0.05);
+    super("ClawWrist", 0.02, 0, 0);
+    setAbsoluteTolerance(3);
     getPIDController().setContinuous(false);
     enable();
   }
@@ -34,11 +34,12 @@ public class ClawWrist extends PIDSubsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new ManualClaw());
+    clawZero = clawPot.get();
   }
 
   @Override
   protected double returnPIDInput() {
-    return clawPot.get();
+    return (clawPot.get()-clawZero)*-1;
   }
 
   @Override

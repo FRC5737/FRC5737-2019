@@ -7,8 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -28,11 +26,6 @@ public class Claw extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ManualClaw());
-  }
-
-  public void up(double speed) {
-    clawMotor.set(speed);
   }
 
   public void in() {
@@ -49,7 +42,7 @@ public class Claw extends Subsystem {
       //Claw in
       centerSole.set(DoubleSolenoid.Value.kForward);
       in = false;
-      Timer.delay(0.2);
+      Timer.delay(0.1);
       leftSole.set(DoubleSolenoid.Value.kReverse);
       //rightSole.set(DoubleSolenoid.Value.kReverse);
       Timer.delay(0.5);
