@@ -10,12 +10,12 @@ package frc.robot.commands;
 import com.ctre.phoenix.sensors.PigeonIMU.PigeonState;
 
 import edu.wpi.first.wpilibj.command.InstantCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
-import frc.robot.RobotMap;
 
 /**
  * Runs every iteration
- * Updates the position of robot and accesses values for all sensors
+ * Updates all values, including network tables
  */
 
 public class Update extends InstantCommand {
@@ -27,12 +27,14 @@ public class Update extends InstantCommand {
   // Called once when the command executes
   @Override
   protected void initialize() {
-
+    /*Update network table values*/
+    SmartDashboard.updateValues();
 
     /**Get pigeon values and update values for drive base
       *First check connection to pigeon to prevent error. If error, stop all commands
       *Positive is clockwise, negative is counter clockwise
     */
+
     PigeonState state = Robot.driveBase.pigeon.getState();
     if (state == PigeonState.Ready) { 
       double ypr[] = new double [3];

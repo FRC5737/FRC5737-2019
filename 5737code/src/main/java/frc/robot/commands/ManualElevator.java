@@ -27,9 +27,9 @@ public class ManualElevator extends Command {
       speed = 0;
     }
     if (s < 0) {
-      Robot.elevator.down(speed);
+      Robot.elevator.setSetpoint(Robot.elevator.getSetpoint()+speed);
     } else {
-      Robot.elevator.up(speed);
+      Robot.elevator.setSetpoint(Robot.elevator.getSetpoint()-speed);
     }
   }
 

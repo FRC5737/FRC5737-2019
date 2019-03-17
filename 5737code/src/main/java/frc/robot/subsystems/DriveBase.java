@@ -15,6 +15,7 @@ import com.ctre.phoenix.sensors.PigeonIMU;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ManualDrive;
 
@@ -92,6 +93,11 @@ public class DriveBase extends Subsystem {
     //leftBackTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
     //rightFrontTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
     //rightBackTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+
+    //Dashboard values
+    SmartDashboard.putNumber("Angle", angle);
+    SmartDashboard.putNumber("X", xCoordinate);
+    SmartDashboard.putNumber("Y", yCoordinate);
 
     setDefaultCommand(new ManualDrive());
   }

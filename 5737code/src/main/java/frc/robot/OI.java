@@ -40,7 +40,7 @@ public class OI {
   public OI() {
 		funcButton1.whenPressed(new ClawIn());
 		funcButton2.whenPressed(new ClawOut());
-		funcButton3.whenPressed(new Lift());
+		funcButton3.whenPressed(new ClawOut2());
 		funcButton4.whenPressed(new Down());
 	}
 }

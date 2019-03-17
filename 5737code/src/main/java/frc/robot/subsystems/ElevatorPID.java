@@ -7,22 +7,26 @@
 
 package frc.robot.subsystems;
 
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Ultrasonic;
-import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ManualElevator;
 
 /**
- * The frontal elevator for use with the ball mechanism
+ * This is the elevator class, but with ultrasonic sensor for PID
  */
+public class ElevatorPID extends PIDSubsystem {
+  /**
+   * Init all variables - ultrasonic and motor
+   */
 
-public class Elevator extends Subsystem {
-  //Initialize two motors - One slaved to the other
+   //Initialize two motors - One slaved to the other
   public WPI_TalonSRX elevatorMainMotor = new WPI_TalonSRX(RobotMap.elevatorMotor);
 
   //Initalize two limit switches - one top and one bottom
@@ -31,7 +35,6 @@ public class Elevator extends Subsystem {
 
   //Ultrasonic sensor
   public Ultrasonic ultra = new Ultrasonic(RobotMap.ultrasonicPing, RobotMap.ultrasonicEcho);
-
   //Up and down, with checks in case already in position to prevent damage
   public void up(double speed) {
     if (topSwitch.get() == false) {
@@ -39,6 +42,7 @@ public class Elevator extends Subsystem {
     } else { 
       elevatorMainMotor.set(0.25);
     }
+    setAbsoluteTolerance(30);
   }
 
   public void down(double speed) {
@@ -48,9 +52,35 @@ public class Elevator extends Subsystem {
       elevatorMainMotor.set(0.25);
     }
   }
+   
+  public ElevatorPID() {
+    super("ElevatorPID", 0.01, 0, 0);
+  }
 
   @Override
   public void initDefaultCommand() {
+    SmartDashboard.putNumber("Elevator",getPosition());
+    ultra.setAutomaticMode(true);
     setDefaultCommand(new ManualElevator());
+  }
+
+  @Override
+  protected double returnPIDInput() {
+    return ultra.getRangeMM();
+  }
+
+  @Override
+  protected void usePIDOutput(double output) {
+    if (getSetpoint() < 100) { 
+      setSetpoint(10);
+    } else if (getSetpoint() > 1000) { 
+      setSetpoint(1000);
+    }
+
+    if (output < 0) {
+      up(output*-1);
+    } else if (output > 0) {
+      down(output*-1);
+    }
   }
 }

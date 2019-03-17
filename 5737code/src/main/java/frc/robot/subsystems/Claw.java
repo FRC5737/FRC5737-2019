@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
-import frc.robot.commands.ManualClaw;
 
 /**
  * Claw mechanism
@@ -46,6 +45,13 @@ public class Claw extends Subsystem {
       leftSole.set(DoubleSolenoid.Value.kReverse);
       //rightSole.set(DoubleSolenoid.Value.kReverse);
       Timer.delay(0.5);
+      centerSole.set(DoubleSolenoid.Value.kReverse);
+    }
+  }
+
+  public void out2() {
+    if (in == true) { 
+      leftSole.set(DoubleSolenoid.Value.kReverse);
       centerSole.set(DoubleSolenoid.Value.kReverse);
     }
   }

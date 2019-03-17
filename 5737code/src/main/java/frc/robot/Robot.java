@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -18,22 +19,25 @@ import frc.robot.commands.Update;
 import frc.robot.subsystems.Claw;
 import frc.robot.subsystems.ClawWrist;
 import frc.robot.subsystems.DriveBase;
-import frc.robot.subsystems.Elevator;
+import frc.robot.subsystems.ElevatorPID;
 
 
 
 public class Robot extends TimedRobot {
+  //Network Tables
+  Timer time = new Timer();
 
+  //Input
   public static OI oi;
 
   //Subsystem init
   public static final DriveBase driveBase = new DriveBase();
-  public static final Elevator elevator = new Elevator();
+  public static final ElevatorPID elevator = new ElevatorPID();
   public static final Claw claw = new Claw();
   public static final ClawWrist clawWrist = new ClawWrist();
-
   public static final Compressor c = new Compressor(RobotMap.compressor);
 
+  //Commands
   Command autonomousCommand;
   Command updateCommand;
   SendableChooser<Command> chooser = new SendableChooser<>();
@@ -52,9 +56,6 @@ public class Robot extends TimedRobot {
 
     driveBase.pigeon.setAccumZAngle(0);
     driveBase.pigeon.setYaw(0);
-
-    SmartDashboard.putData("Auto mode", chooser);
-    SmartDashboard.putData(driveBase);
 
     c.setClosedLoopControl(true);
 
@@ -80,6 +81,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    //Start the match timer
+    time.start();
+    SmartDashboard.putNumber("Time",time.getMatchTime());
+
     autonomousCommand = chooser.getSelected();
 
     if (autonomousCommand != null) {
@@ -94,7 +99,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }

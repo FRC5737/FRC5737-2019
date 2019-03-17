@@ -47,6 +47,8 @@ public class RobotMap {
     //Elevator sensors
   public static int limitSwitchBottom = 7;
   public static int limitSwitchTop = 8;
+  public static int ultrasonicPing = 1;
+  public static int ultrasonicEcho = 2;
 
   //Claw
     //Claw actuators

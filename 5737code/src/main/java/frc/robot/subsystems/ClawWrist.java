@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
 import frc.robot.commands.ManualClaw;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
@@ -33,8 +34,10 @@ public class ClawWrist extends PIDSubsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ManualClaw());
+    SmartDashboard.putNumber("ClawAngle", getPosition());
+
     clawZero = clawPot.get();
+    setDefaultCommand(new ManualClaw());
   }
 
   @Override

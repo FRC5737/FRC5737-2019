@@ -28,7 +28,7 @@ public class ManualDrive extends Command {
     if (Robot.oi.driveStick.getX() < 0) {
       x = -x;
     }
-    double y =  Math.pow(Math.abs(Robot.oi.driveStick.getY()),2);
+    double y =  (Math.pow(Math.abs(Robot.oi.driveStick.getY()),2))*-1;
     if (Robot.oi.driveStick.getY() < 0) {
       y = -y;
     }
