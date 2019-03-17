@@ -39,14 +39,14 @@ public class Update extends InstantCommand {
     if (state == PigeonState.Ready) { 
       double ypr[] = new double [3];
 
+      System.out.println(ypr);
+
       Robot.driveBase.pigeon.getYawPitchRoll(ypr); //Make sure angle is always between -180 and 180
       if (ypr[0] >= 180) {
         ypr[0] -= 360;
-        Robot.driveBase.pigeon.setYaw(ypr[0]); //And update value to drivebase
       }
       else if (ypr[0] < -180) {
         ypr[0] += 360;
-        Robot.driveBase.pigeon.setYaw(ypr[0]);
       }
       Robot.driveBase.angle = ypr[0];
     } else { //Connection issue with pigeon

@@ -53,7 +53,8 @@ public class Claw extends Subsystem {
     if (in == true) { 
       leftSole.set(DoubleSolenoid.Value.kReverse);
       centerSole.set(DoubleSolenoid.Value.kReverse);
-    }
+      in = false;
+    } 
   }
 
 }
