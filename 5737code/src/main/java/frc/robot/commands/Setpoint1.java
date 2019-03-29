@@ -12,7 +12,7 @@ import frc.robot.Robot;
 import frc.robot.subsystems.ElevatorPID;
 
 /**
- * Setpoint for 
+ * Setpoint for
  */
 public class Setpoint1 extends InstantCommand {
   /**
@@ -28,6 +28,7 @@ public class Setpoint1 extends InstantCommand {
   @Override
   protected void initialize() {
     Robot.elevator.setSetpoint(500);
+    Robot.elevator.enable();
     Robot.clawWrist.setSetpoint(8);
   }
 

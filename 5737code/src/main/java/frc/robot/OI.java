@@ -42,13 +42,13 @@ public class OI {
 	public JoystickButton funcButton12 = new JoystickButton(functionStick, 12);
 
   public OI() {
-		//funcButton1.whenPressed(new ClawIn());
-		//funcButton2.whenPressed(new ClawOut());
-		//funcButton3.whenPressed(new ClawOut2());
-		//funcButton8.whenPressed(new PigeonReset());
-		//funcButton11.whenPressed(new Setpoint1());
+		funcButton1.whenPressed(new ClawIn());
+		funcButton2.whenPressed(new ClawOut());
+		funcButton3.whenPressed(new ClawOut2());
+		funcButton8.whenPressed(new PigeonReset());
+		funcButton11.whenPressed(new Setpoint1());
 		//funcButton12.whenPressed(new Setpoint2());
-		funcButton1.whenPressed(new Lift());
-		funcButton2.whenPressed(new Down());
+		//funcButton1.whenPressed(new Lift());
+		//funcButton2.whenPressed(new Down());
 	}
 }

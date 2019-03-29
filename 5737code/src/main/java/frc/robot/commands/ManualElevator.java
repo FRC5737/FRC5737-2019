@@ -25,6 +25,8 @@ public class ManualElevator extends Command {
     double speed =  Math.pow(Math.abs(s),2);
     if (Math.abs(speed) < 0.3) {
       speed = 0;
+    } else {
+      Robot.elevator.disable();
     }
     if (s < 0) {
       Robot.elevator.down(speed);

@@ -39,15 +39,21 @@ body > * {
     background: #222;
 }
 
+header {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
 hr {
     border-top: 3px solid rgba(254, 49, 49, 1);
 }
 
 #team-name {
     display: block;
-    height: 10vh;
+    height: 6vh;
     width: 100%;
-    font-size: 10vh;
+    font-size: 6vh;
     line-height: .8;
 }
 
@@ -60,23 +66,35 @@ hr {
     line-height: .8;
 }
 
-#camera-container {
-    border-left: 3px solid rgba(254, 49, 49, 1);
-    border-right: 3px solid rgba(254, 49, 49, 1);
-    height: 68vh;
-    padding: 5vw;
+.camera-container {
+    height: 50vh;
+    padding: 1vw;
     padding-top: 5px;
     padding-bottom: 5px;
 }
 
-#camera {
+#camera1 {
     padding: 0;
     width: 100%;
     height: 100%;
     overflow: hidden;
-    background-color: #333;
-    /* You'll need to mess with this a bit to get your camera to work. Replace the url with a live-updating image feed from your camera. Using other camera streaming systems will require some tweaking. */
-    /*background-image: url('LINK TO CAMERA SOURCE HERE');*/
+    background-color: inherit;
+    background-image: url('http://frcvision.local:1181/stream.mjpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+#camera2 {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-color: inherit;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('http://frcvision.local:1182/stream.mjpg');
 }
 
 svg * {
