@@ -12,6 +12,7 @@ import com.ctre.phoenix.sensors.PigeonIMU.PigeonState;
 import edu.wpi.first.wpilibj.command.InstantCommand;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 /**
  * Runs every iteration
@@ -38,17 +39,8 @@ public class Update extends InstantCommand {
     PigeonState state = Robot.driveBase.pigeon.getState();
     if (state == PigeonState.Ready) { 
       double ypr[] = new double [3];
-
-      System.out.println(ypr);
-
       Robot.driveBase.pigeon.getYawPitchRoll(ypr); //Make sure angle is always between -180 and 180
-      if (ypr[0] >= 180) {
-        ypr[0] -= 360;
-      }
-      else if (ypr[0] < -180) {
-        ypr[0] += 360;
-      }
-      Robot.driveBase.angle = ypr[0];
+      Robot.driveBase.angle = ypr[0] % 360;
     } else { //Connection issue with pigeon
       System.out.println("Something just ****** the connection");
       Robot.stop();
@@ -64,12 +56,18 @@ public class Update extends InstantCommand {
      * Algorithm courtesy of https://research.ijcaonline.org/volume113/number3/pxc3901586.pdf
     */
     //First obtain wheel angular velocity in radians travelled in last 0.02 seconds
-    /*double a,b,c,d;
-    a = Math.toRadians(Robot.driveBase.leftFrontTalon.getSelectedSensorVelocity() * 0.087890625);
-    b = Math.toRadians(Robot.driveBase.rightFrontTalon.getSelectedSensorVelocity() * 0.087890625);
-    c = Math.toRadians(Robot.driveBase.leftBackTalon.getSelectedSensorVelocity() * 0.087890625);
-    d = Math.toRadians(Robot.driveBase.rightBackTalon.getSelectedSensorVelocity() * 0.087890625);
-    //0.087890625 is from 360 (fraction to degrees) / 4096 (units per rotation)
+    double a,b,c,d;
+    /*System.out.println("L");
+    System.out.println(Robot.driveBase.leftFrontTalon.getSelectedSensorVelocity());
+    System.out.println(Robot.driveBase.rightFrontTalon.getSelectedSensorVelocity());
+    System.out.println(Robot.driveBase.leftBackTalon.getSelectedSensorVelocity());
+    System.out.println(Robot.driveBase.rightBackTalon.getSelectedSensorVelocity());*/
+
+    a = Math.toRadians(Robot.driveBase.leftFrontTalon.getSelectedSensorVelocity() * 4.5);
+    b = Math.toRadians(Robot.driveBase.rightFrontTalon.getSelectedSensorVelocity() * 4.5);
+    c = Math.toRadians(Robot.driveBase.leftBackTalon.getSelectedSensorVelocity() * 4.5);
+    d = Math.toRadians(Robot.driveBase.rightBackTalon.getSelectedSensorVelocity() * 4.5);
+    //4.5 is from 360 (fraction to degrees) / 80 (units per rotation)
 
     //Now the distance travelled in the last iteration (0.02 seconds)
     double longitudinalDistance = (a+b+c+d) * (RobotMap.wheelRadius/4); //Forward
@@ -86,7 +84,12 @@ public class Update extends InstantCommand {
 
     //Finally update this value to the robot drivebase
     Robot.driveBase.xCoordinate += globalX;
-    Robot.driveBase.yCoordinate += globalY;*/
+    Robot.driveBase.yCoordinate += globalY;
+
+    /*System.out.println("X");
+    System.out.println(Robot.driveBase.xCoordinate);
+    System.out.println("Y");
+    System.out.println(Robot.driveBase.yCoordinate);*/
 
   }
 

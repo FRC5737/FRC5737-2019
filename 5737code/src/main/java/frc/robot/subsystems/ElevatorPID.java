@@ -42,7 +42,6 @@ public class ElevatorPID extends PIDSubsystem {
     } else { 
       elevatorMainMotor.set(0.25);
     }
-    setAbsoluteTolerance(30);
   }
 
   public void down(double speed) {
@@ -54,7 +53,10 @@ public class ElevatorPID extends PIDSubsystem {
   }
    
   public ElevatorPID() {
-    super("ElevatorPID", 0.01, 0, 0);
+    super("ElevatorPID", 0.004, 0, 0.0);
+    setSetpoint(500);
+    setAbsoluteTolerance(30);
+    enable();
   }
 
   @Override
@@ -71,16 +73,19 @@ public class ElevatorPID extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
-    if (getSetpoint() < 100) { 
-      setSetpoint(10);
-    } else if (getSetpoint() > 1000) { 
-      setSetpoint(1000);
+
+    //System.out.println(ultra.getRangeMM());
+    
+    if (getSetpoint() < 70) { 
+      setSetpoint(70);
+    } else if (getSetpoint() > 820) { 
+      setSetpoint(820);
     }
 
     if (output < 0) {
-      up(output*-1);
+      //down(output*-1);
     } else if (output > 0) {
-      down(output*-1);
+      //up(output);
     }
   }
 }

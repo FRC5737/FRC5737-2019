@@ -58,11 +58,7 @@ public class Robot extends TimedRobot {
     driveBase.pigeon.setYaw(0);
 
     c.setClosedLoopControl(true);
-
-    /*Robot.driveBase.leftBackEncoder.reset();
-    Robot.driveBase.leftFrontEncoder.reset();
-    Robot.driveBase.rightBackEncoder.reset();
-    Robot.driveBase.rightFrontEncoder.reset();*/
+    
   }
 
   @Override
@@ -81,6 +77,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void autonomousInit() {
+    Robot.clawWrist.clawZero = Robot.clawWrist.clawPot.get();
     //Start the match timer
     time.start();
     SmartDashboard.putNumber("Time",time.getMatchTime());
@@ -99,6 +96,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    Robot.clawWrist.clawZero = Robot.clawWrist.clawPot.get();
     if (autonomousCommand != null) {
       autonomousCommand.cancel();
     }

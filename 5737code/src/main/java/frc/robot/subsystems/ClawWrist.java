@@ -26,7 +26,7 @@ public class ClawWrist extends PIDSubsystem {
   public double clawZero;
 
   public ClawWrist() {
-    super("ClawWrist", 0.02, 0, 0);
+    super("ClawWrist", 0.025, 0, 0);
     setAbsoluteTolerance(3);
     getPIDController().setContinuous(false);
     enable();
@@ -47,6 +47,8 @@ public class ClawWrist extends PIDSubsystem {
 
   @Override
   protected void usePIDOutput(double output) {
+    //System.out.println("Claw");
+    //System.out.println(getPosition());
     clawMotor.pidWrite(output);
   }
 }

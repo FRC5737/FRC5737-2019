@@ -29,7 +29,7 @@ public class Lift extends Command {
       Robot.driveBase.backLift();
     }
 
-    if (timer == 25) {
+    if (timer == 40) {
       //Robot.driveBase.climbMove(1);
       Robot.driveBase.frontLift();
     }

@@ -29,10 +29,10 @@ public class RobotMap {
   public static int rightBackMotor = 4;
   public static int climbMotorLeft = 5;
   public static int climbMotorRight = 6;
-  public static int climbFrontF = 6;
-  public static int climbFrontR = 7;
-  public static int climbBackF = 0;
-  public static int climbBackR = 1;
+  public static int climbFrontF = 2;
+  public static int climbFrontR = 0;
+  public static int climbBackF = 5;
+  public static int climbBackR = 4;
     //Drive base constants
   public static double driveP = 0.002;
   public static double driveI = 0.0;
@@ -53,12 +53,12 @@ public class RobotMap {
   //Claw
     //Claw actuators
   public static int clawMotor = 8;
-  public static int leftSoleF = 4;
-  public static int leftSoleR = 5;
-  public static int centerSoleF = 3;
-  public static int centerSoleR = 2;
-  public static int rightSoleF = 4;
-  public static int rightSoleR = 5;
+  public static int leftSoleF = 6;
+  public static int leftSoleR = 7;
+  public static int centerSoleF = 1;
+  public static int centerSoleR = 3;
+  public static int rightSoleF = 6;
+  public static int rightSoleR = 7;
     //Claw sensors
   public static int clawPotentiometer = 0;
 

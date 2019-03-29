@@ -83,16 +83,16 @@ public class DriveBase extends Subsystem {
   public void initDefaultCommand() {
     //The encoders we use are https://www.andymark.com/products/srx-magnetic-encoder
     //Init encoders
-    //leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    //leftBackTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    //rightFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-    //rightBackTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    leftFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    leftBackTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    rightFrontTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+    rightBackTalon.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
     //Adjust frame of each iteration to fit with each loop
     //20 ms
-    //leftFrontTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
-    //leftBackTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
-    //rightFrontTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
-    //rightBackTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+    leftFrontTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+    leftBackTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+    rightFrontTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
+    rightBackTalon.setStatusFramePeriod(StatusFrameEnhanced.Status_2_Feedback0, 20);
 
     //Dashboard values
     SmartDashboard.putNumber("Angle", angle);

@@ -11,22 +11,22 @@ import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
 /**
- * Add your docs here.
+ * Reset pigeon angle to be 0
  */
-public class ClawIn extends InstantCommand {
+public class PigeonReset extends InstantCommand {
   /**
-   * Add your docs here.
+   * RESET!
    */
-  public ClawIn() {
+  public PigeonReset() {
     super();
-    requires (Robot.claw);
   }
 
   // Called once when the command executes
   @Override
   protected void initialize() {
-    System.out.println("Something is good");
-    Robot.claw.in();
+    Robot.driveBase.pigeon.setYaw(0);
+    Robot.driveBase.xCoordinate = 0;
+    Robot.driveBase.yCoordinate = 0;
   }
 
 }

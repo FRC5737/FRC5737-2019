@@ -35,12 +35,20 @@ public class OI {
 	public JoystickButton funcButton5 = new JoystickButton(functionStick, 5);
 	public JoystickButton funcButton6 = new JoystickButton(functionStick, 6);
 	public JoystickButton funcButton7 = new JoystickButton(functionStick, 7);
-  public JoystickButton funcButton8 = new JoystickButton(functionStick, 8);
+	public JoystickButton funcButton8 = new JoystickButton(functionStick, 8);
+	public JoystickButton funcButton9 = new JoystickButton(functionStick, 9);
+	public JoystickButton funcButton10 = new JoystickButton(functionStick, 10);
+	public JoystickButton funcButton11 = new JoystickButton(functionStick, 11);
+	public JoystickButton funcButton12 = new JoystickButton(functionStick, 12);
 
   public OI() {
-		funcButton1.whenPressed(new ClawIn());
-		funcButton2.whenPressed(new ClawOut());
-		funcButton3.whenPressed(new ClawOut2());
-		funcButton4.whenPressed(new Down());
+		//funcButton1.whenPressed(new ClawIn());
+		//funcButton2.whenPressed(new ClawOut());
+		//funcButton3.whenPressed(new ClawOut2());
+		//funcButton8.whenPressed(new PigeonReset());
+		//funcButton11.whenPressed(new Setpoint1());
+		//funcButton12.whenPressed(new Setpoint2());
+		funcButton1.whenPressed(new Lift());
+		funcButton2.whenPressed(new Down());
 	}
 }

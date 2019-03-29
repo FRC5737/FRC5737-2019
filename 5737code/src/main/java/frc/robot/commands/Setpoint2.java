@@ -7,42 +7,27 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.InstantCommand;
 import frc.robot.Robot;
 
-public class ManualClaw extends Command {
-
-  double prevAngle;
-
-  public ManualClaw() {
+/**
+ * Setpoint for Jordan
+ */
+public class Setpoint2 extends InstantCommand {
+  /**
+   * Hot keys for driver to several predefined positions
+   */
+  public Setpoint2() {
+    super();
+    requires(Robot.elevator);
     requires(Robot.clawWrist);
   }
 
+  // Called once when the command executes
   @Override
   protected void initialize() {
-    prevAngle = 0.0;
+    Robot.elevator.setSetpoint(70);
+    Robot.clawWrist.setSetpoint(45);
   }
 
-  @Override
-  protected void execute() {
-    double angle = ((Robot.oi.functionStick.getThrottle()*-1+1)*50)+4;
-    if (Math.abs(angle - prevAngle) > 10) {
-      //System.out.println("Moving");
-      prevAngle = angle;
-      Robot.clawWrist.setSetpoint(angle);
-    }
-  }
-
-  @Override
-  protected boolean isFinished() {
-    return false;
-  }
-
-  @Override
-  protected void end() {
-  }
-
-  @Override
-  protected void interrupted() {
-  }
 }
